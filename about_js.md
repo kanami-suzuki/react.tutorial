@@ -68,3 +68,24 @@ let age = 23;
 ~~~
 let isStudent = false;
 ~~~
+
+### オブジェクト
+- データをひとまとめにする機能(データ型)
+- 商品管理システムを作りたいと考えた時に下記のような情報が必要になったと仮定する
+  - 商品名 → 文字列(name)
+  - 価格 → 数値(price)
+  - 期間限定商品か →　真偽値(isLimited)
+  上記の項目をひとまとめにしたい → そこでオブジェクトを使用する
+~~~
+//オブジェクトの基本的な書き方
+const beer = {
+  name: "常夏ビール",
+  price: 300,
+  isLimited; true,
+};
+const cookie = {
+  name: "素朴なクッキー",
+  price: 200,
+  isLimited; false,
+};
+~~~
