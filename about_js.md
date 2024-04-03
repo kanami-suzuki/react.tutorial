@@ -155,10 +155,93 @@ if(product.isEatIn === true){
   //イートインでの食事であれば消費税10%を適用する
   price = price * 1.10;
   //元のprice(500円)にprice×消費税率(10%)をかけたものを再代入する
-  console.log("結果", price)
 }else{
   //テイクアウトであれば消費税8%を適用する
   price = price * 1.08;
   //元のprice(500円)にprice×消費税率(8%)をかけたものを再代入する
+}
+console.log("結果", price);
+~~~
+
+### for 繰り返し制御
+- 同じような処理を何度も繰り返したい時に使用する
+- 配列に対して使用することが多い
+~~~
+//商品を複数購入したときにかかる税金を一つずつではなく一回の命令で繰り返し計算する
+const products = [
+  {
+    name: "ハンバーガー",
+    isEatIn: true,
+    price: 500
+  },
+  {
+    name: "寿司",
+    isEatIn: true,
+    price: 1000
+  },
+  {
+    name: "マヨネーズ",
+    isEatIn: false,
+    price: 300
+  }
+];
+
+for (const product of products){
+  //for(const 変数名 of 配列名)　配列名で指定した配列から取り出したものが変数名に代入される
+
+  let price = product.price;
+  if(product.isEatIn === true){
+    price = price * 1.10;
+  } else{
+    price = price * 1.08;
+  }
+  console.log("結果", price);
+}
+~~~
+
+### 関数
+- 処理をまとめることができる
+  - 汎用的な同じ処理を何度も書かなくて良い。色々なところで再利用できる
+  - 名前をつけて関数でまとめることでコード自体が読みやすくなる
+~~~
+//商品を複数購入したときにかかる税金を一つずつではなく一回の命令で繰り返し計算する
+const products = [
+  {
+    name: "ハンバーガー",
+    isEatIn: true,
+    price: 500
+  },
+  {
+    name: "寿司",
+    isEatIn: true,
+    price: 1000
+  },
+  {
+    name: "マヨネーズ",
+    isEatIn: false,
+    price: 300
+  },
+];
+
+//消費税の計算を関数にまとめる
+function calculateTax(product){
+  //function 関数名(引数)
+
+  let price = product.price;
+  if(product.isEatIn === true){
+    price = price * 1.10;
+  } else{
+    price = price * 1.08;
+  }
+  //処理
+
+  return price;
+  //return 返り値;
+}
+
+for(const product of products){
+  const price = calculateTax(product);
+
+  console.log("結果", price);
 }
 ~~~
