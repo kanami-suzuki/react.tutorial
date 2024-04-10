@@ -1,6 +1,11 @@
 import { useState } from "react";
 
 function Square({ value, onSquareClick }) {
+  /*propsをJSのよくある形に直すと
+    function Square(props){
+      const{value, onSquareClick} = props;
+    }
+  */
   return (
     <button className="square" onClick={onSquareClick}>
       {/* className="square"はCSSのクラス名なので、CSSで見た目を変更することができる */}
@@ -110,6 +115,7 @@ export default function Game() {
       <Square value={"a"} onSquareClick={() => console.log("click")} />
       <Square value={"b"} onSquareClick={() => console.log("click")} />
       <Square value={"c"} onSquareClick={() => console.log("click")} />
+      {/*props＝GameコンポーネントからSquareコンポーネントにvalueの中身を渡す */}
     </>
   );
 }

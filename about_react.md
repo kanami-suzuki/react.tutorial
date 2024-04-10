@@ -46,3 +46,56 @@ React.createElement(
 JSXを使用すると、HTMLのようにJSを記述することができる
 */
 ~~~
+
+### props
+- 親コンポーネントから子コンポーネント値を渡すときに使う
+    1. 子コンポーネントでどういうpropsを受け取るか決める(引数)
+    2. 親の方で中身を渡す
+- App.jsで例えると、
+    - Gameコンポーネント → Boardコンポーネント
+    - Boardコンポーネント → Squareコンポーネント
+    - Gameコンポーネント → Squareコンポーネント
+- propsの注意点として以下のようなものがある
+    - propsの値は変更できない
+    - 親から子へのみ値を渡すことができる(逆はできない)
+
+App.jsのSquare関数で例えると以下のようになる
+~~~
+function Square({ value, onSquareClick }) {
+  return (　//子コンポーネント
+    <button className="square" onClick={onSquareClick}>
+      {value}
+    </button>
+  );
+}
+export default function Game() { 
+  return (　//親コンポーネント
+    <>
+      <Square value={"c"} onSquareClick={() => console.log("click")} />
+      {/*props＝GameコンポーネントからSquareコンポーネントにvalueの中身を渡す */}
+    </>
+  );
+}
+~~~
+- 上記の`Square()`の引数に`{ value, onSquareClick }`というpropsオブジェクトを入れている
+- 下記のように別な書き方をすることもできる
+~~~
+//オブジェクトを展開して代入する
+function Square(props){
+    const {value, onSquareClick} = props
+    return (　
+    <button className="square" onClick={onSquareClick}>
+      {value}
+    </button>
+  );
+}
+
+//コンポーネントの中でpropsオブジェクトの中身を定義する
+function Square(props){
+    return (　
+    <button className="square" onClick={props.onSquareClick}>
+      {props.value}
+    </button>
+  );
+}
+~~~
