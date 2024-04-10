@@ -6,6 +6,8 @@ function Square({ value, onSquareClick }) {
       {value}
     </button>
   );
+  // returnでJSXを返している
+  // returnでJSXを返す関数をReactではコンポーネントと呼ぶ
 }
 
 function Board({ xIsNext, squares, onPlay }) {
@@ -52,6 +54,7 @@ function Board({ xIsNext, squares, onPlay }) {
   );
 }
 
+// この関数が実際にindex.jsにエクスポートしている
 export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
