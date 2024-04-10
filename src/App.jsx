@@ -3,6 +3,7 @@ import { useState } from "react";
 function Square({ value, onSquareClick }) {
   return (
     <button className="square" onClick={onSquareClick}>
+      {/* className="square"はCSSのクラス名なので、CSSで見た目を変更することができる */}
       {value}
     </button>
   );
@@ -97,9 +98,15 @@ function Board({ xIsNext, squares, onPlay }) {
   );
 }*/
 
+//演習：画面に四角を表示する
 export default function Game() {
   return (
+    //ここに画面に表示したいものを記述する
     <>
+      {/* 四角のコンポーネントはSquare関数で定義されているので、Squareコンポーネントを呼び出す。
+      Squareコンポーネントには引数が二つあり、Board関数内でSquareコンポーネントに記述されている
+      value={""}の中身(squares)はこの関数内には無いためvalue={""}の中身は空かもしくは何かデータ型を入れる。
+      もう一つの引数(onSquareClick)はSquareの中身がクリックされたときに行われる処理を定義する関数*/}
       <Square value={"a"} onSquareClick={() => console.log("click")} />
       <Square value={"b"} onSquareClick={() => console.log("click")} />
       <Square value={"c"} onSquareClick={() => console.log("click")} />
