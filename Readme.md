@@ -7,6 +7,6 @@
 <br><br>
 - OS：Mac
 - 言語：JavaScript
-- フレームワーク：React
+- ライブラリ：React
 - エディタ：Codesandbox
 - ツール：GitHub

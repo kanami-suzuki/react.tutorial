@@ -55,9 +55,6 @@ JSXを使用すると、HTMLのようにJSを記述することができる
     - Gameコンポーネント → Boardコンポーネント
     - Boardコンポーネント → Squareコンポーネント
     - Gameコンポーネント → Squareコンポーネント
-- propsの注意点として以下のようなものがある
-    - propsの値は変更できない
-    - 親から子へのみ値を渡すことができる(逆はできない)
 
 App.jsのSquare関数で例えると以下のようになる
 ~~~
@@ -98,4 +95,17 @@ function Square(props){
     </button>
   );
 }
+~~~
+- propsの注意点として以下のようなものがある
+    - propsの値は変更できない
+    - 親から子へのみ値を渡すことができる(逆はできない)
+~~~
+function Square(props){
+    props.value = "書き換えたい" //最初から定義することはできない
+    return (　
+    <button className="square" onClick={props.onSquareClick}>
+      {props.value}
+    </button>
+  );
+}  
 ~~~
