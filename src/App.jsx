@@ -117,17 +117,39 @@ function Board({ xIsNext, squares, onPlay }) {
 // この関数が実際にindex.jsにエクスポートしている
 export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
+  /*のnullが入った配列(初期値)。マスの数を表している
+  Squareをクリックしていない状態は全ての配列がnullになっている
+  Squareをクリックすると該当するマスが"X"または"O"になる
+  さらに、ゲームの内容を記録するために二次元配列になっているため、マスをクリックすると配列が増えていく
+  [
+    初期の状態
+    [null, null, null, null, null, null, null, null, null],
+
+    １手目の状態
+    ["X", null, null, null, null, null, null, null, null],
+
+    2手目の状態
+    ["X", null, null, null, null, null, null, null, "O"],
+    ...以下追加されていく
+  ]
+  */
   const [currentMove, setCurrentMove] = useState(0);
+  /*
+    何手目かを表示する。初期値は0手
+  */
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
   //squareがクリックされた数をカウントするstateを作る(演習)
   const [clickCount, setClickCount] = useState(0);
 
+  console.log(history);
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
+    //二次元配列をセットしている
     setCurrentMove(nextHistory.length - 1);
+    //画面上で前の手を確認するために-1が記述されている
     setClickCount(clickCount + 1);
     //Squareがクリックされたら
   }
