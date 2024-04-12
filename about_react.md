@@ -28,6 +28,7 @@
 - JavaScriptの拡張言語。facebook社が開発した
 - JavaScriptベースで書かれている言語
 - JavaScriptとHTMLを掛け合わせて使えるようにした言語
+- HTMLのような記法でUIのレイアウトを定義している
 - テンプレート言語ではなくあくまで拡張言語。JSXの中でHTMLっぽい記述をしながらJavaScriptが使える
 ~~~
 //JSXを使用しない場合(Vanilla JS)
@@ -45,6 +46,26 @@ React.createElement(
 /*JSXを使用しない場合にReactの構文を使用するときは、必ず頭にReact.createElementとつけなければならない。
 JSXを使用すると、HTMLのようにJSを記述することができる
 */
+~~~
+
+- JSXを記述するときのルール
+    - 常に一つにルート要素(親要素)を返す
+~~~
+//NG returnした時に3つの親要素としてみなされるため、エラーが出る
+return(
+    <div>アイテム1</div>
+    <div>アイテム2</div>
+    <div>アイテム3</div>
+)
+
+//OK <></>はからの要素を意味している。下記だと親要素divが一つの中に子要素が3つなのでエラーが出ない
+return(
+    <>
+        <div>アイテム1</div>
+        <div>アイテム2</div>
+        <div>アイテム3</div>
+    </>
+)
 ~~~
 
 ### クラスコンポーネントと関数コンポーネント
