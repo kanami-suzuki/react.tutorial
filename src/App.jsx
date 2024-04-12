@@ -146,16 +146,27 @@ export default function Game() {
   console.log(history);
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    /*
+    上の...historyはスプレッド構文 。配列を格納している
+    nextHistoryにuseState([Array(9).fill(null)]).slice(0, currentMove + 1), nextSquares
+    を代入している
+    */
     setHistory(nextHistory);
     //二次元配列をセットしている
     setCurrentMove(nextHistory.length - 1);
     //画面上で前の手を確認するために-1が記述されている
-    setClickCount(clickCount + 1);
+    // setClickCount(clickCount + 1);
     //Squareがクリックされたら
   }
 
   function jumpTo(nextMove) {
     setCurrentMove(nextMove);
+  }
+
+  function onClickReset() {
+    //historyとcurrentMoveを初期状態にする
+    setHistory([Array(9).fill(null)]);
+    setCurrentMove(0);
   }
 
   const moves = history.map((squares, move) => {
@@ -180,7 +191,10 @@ export default function Game() {
       <div className="game-info">
         <ol>{moves}</ol>
       </div>
-      <div>clickCount={clickCount}</div>
+      <div>
+        <button onClick={onClickReset}>リセット</button>
+      </div>
+      {/* <div>clickCount={clickCount}</div> */}
       {/* ↑Squareがクリックされるとクリックされた数をカウントする */}
     </div>
   );
