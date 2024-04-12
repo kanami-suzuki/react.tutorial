@@ -121,10 +121,15 @@ export default function Game() {
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
+  //squareがクリックされた数をカウントするstateを作る(演習)
+  const [clickCount, setClickCount] = useState(0);
+
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
+    setClickCount(clickCount + 1);
+    //Squareがクリックされたら
   }
 
   function jumpTo(nextMove) {
@@ -153,6 +158,8 @@ export default function Game() {
       <div className="game-info">
         <ol>{moves}</ol>
       </div>
+      <div>clickCount={clickCount}</div>
+      {/* ↑Squareがクリックされるとクリックされた数をカウントする */}
     </div>
   );
 }

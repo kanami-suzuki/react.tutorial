@@ -172,9 +172,9 @@ export default function Game() {
 ~~~
 //初期値
 const [count, setCount] = useState(0);
-//useStateでstateを宣言する。上記ではcountという名前のstateを作成している
-//setCountはstateを更新する関数
-//useState(count)の初期値は0でsetCount関数で更新していく
+//useStateと初期値でstateを宣言する
+//stateの戻り値(count)とstateを更新する関数(setCount)を配列にする
+//stateを更新する関数を適切なところで(親など)呼ぶことで、stateが更新されて、画面上に更新されて表示される
 
 //更新
 setCount(1);
