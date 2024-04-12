@@ -67,6 +67,52 @@ return(
     </>
 )
 ~~~
+    - JSXの中にJavaScriptを書くときは{}で囲う
+~~~
+export default function App(){
+    const val1 = 1;
+    const val1 = 100;
+    <>
+        <div>表示する： {val1} </div>
+        <div>表示する： {val1 + val2} </div>
+    </>
+}
+~~~
+
+- JSXでよくある記法
+    - 三項演算子
+~~~
+const flag = true;
+const result = flag ? "trueの処理" : "falseの処理";
+
+//trueであれば表示される
+constole.log("結果")
+
+//セール商品かどうかで値段を変える。セール商品ならtrueが表示される
+{
+    isSale ? <div>800円(20%OFF)</div> : <div>1000円</div>;
+}
+~~~
+
+    - &&による短絡評価の利用
+    - 例：Aがfalseの場合はBを評価しない`A && B;`
+~~~
+//isSaleがtrueの場合のみ"セール中！"という文言を表示する
+{
+    isSale && <h1>セール中！</h1>;
+}
+~~~
+~~~
+//trueの時は画面上に「セール中！」の文言と「800円(20%OFF)」の文言が表示される
+//falseの時は画面上に「1000円」の文言のみ表示される
+export default function App(){
+    const isSale = true;
+    <div className="App">
+        {isSale && <h1>セール中！</h1>}
+        {isSale ? <div>800円(20%OFF)</div> : <div>1000円</div>}
+    </div>
+}
+~~~
 
 ### クラスコンポーネントと関数コンポーネント
 - クラスコンポーネント：JavaScriptのクラスを使って定義される。使用方法はJSの関数に似ていて、従来ではクラスコンポーネントの方が多く使用されていた。複雑なコンポーネントに適しているが、コードが長くなる欠点がある　
