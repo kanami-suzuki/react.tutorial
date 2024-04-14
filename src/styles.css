@@ -75,6 +75,10 @@ body {
   background-color: #ccc;
 }
 
+.isred {
+  background-color: #e37a7a;
+}
+
 .board-row:after {
   clear: both;
   content: "";
