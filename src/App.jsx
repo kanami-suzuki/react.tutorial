@@ -55,6 +55,7 @@ function Board({ xIsNext, squares, onPlay }) {
 export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
+  const [isHistoryVisible, setIsHistoryVisivle] = useState(true);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
@@ -82,13 +83,35 @@ export default function Game() {
     );
   });
 
+  //ボタンがクリックされたらヒストリーを隠す処理
+  function onClickHideOrShow() {
+    // ボタンが表示または非表示になっている状態を作りたいのでstateを定義する
+    if (isHistoryVisible === true) {
+      setIsHistoryVisivle(false);
+    } else {
+      setIsHistoryVisivle(true);
+    }
+    /*
+    以下のようにも書ける
+    setIsHistoryVisivle(!setIsHistoryVisivle);
+    現在のsetIsHistoryVisivleの反対になるという意味の記述で、if文を書かなくてもOKなので現場ではよく使用される記述方法らしい
+    */
+  }
+
   return (
     <div className="game">
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-        <ol>{moves}</ol>
+        {/* 履歴を隠すボタンを作成する */}
+        <ol>
+          <button onClick={onClickHideOrShow}>
+            {isHistoryVisible ? "ヒストリーを隠す" : "ヒストリーを表示する"}
+            {/* 三項演算子でtrueだったら"ヒストリーを隠す"falseだったら"ヒストリーを表示する"という意味 */}
+          </button>
+        </ol>
+        {isHistoryVisible && <ol>{moves}</ol>}
       </div>
     </div>
   );
