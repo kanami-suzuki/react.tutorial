@@ -8,7 +8,7 @@ function Square({ value, onSquareClick }) {
   );
 }
 
-function Board({ xIsNext, squares, onPlay }) {
+function Board({ xIsNext, squares, onPlay, onClickNextGame }) {
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -23,6 +23,8 @@ function Board({ xIsNext, squares, onPlay }) {
   }
 
   const winner = calculateWinner(squares);
+  //calculateWinner()の計算をwinnerに代入している
+  //なので、winnerの有無で「Next Game」ボタンの表示切り替えをすることができる
   let status;
   if (winner) {
     status = "Winner: " + winner;
@@ -32,7 +34,18 @@ function Board({ xIsNext, squares, onPlay }) {
 
   return (
     <>
+      {winner && <button onClick={onClickNextGame}>Next Game</button>}
+      {/* 
+        勝敗がついた時だけボタンを表示したい
+        短絡評価を活用してwinnerの中身がnullの時はfalseの判定になるので、
+        ボタンを表示させず、winnerの中身がある時はtrueの判定になり、
+        ボタンが表示される
+
+        ボタンがクリックされたら親コンポーネントのGameでリセットしたいため、
+        イベントハンドラーでpropsで受け取れるようにする
+      */}
       <div className="status">{status}</div>
+      {/* Next player: の部分 */}
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
@@ -98,10 +111,19 @@ export default function Game() {
     */
   }
 
+  function resetGame() {
+    setHistory([Array(9).fill(null)]);
+    setCurrentMove(0);
+  }
   return (
     <div className="game">
       <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+        <Board
+          xIsNext={xIsNext}
+          squares={currentSquares}
+          onPlay={handlePlay}
+          onClickNextGame={resetGame}
+        />
       </div>
       <div className="game-info">
         {/* 履歴を隠すボタンを作成する */}
@@ -118,6 +140,7 @@ export default function Game() {
 }
 
 function calculateWinner(squares) {
+  //勝敗はcalculateWinnerで計算している
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -132,6 +155,7 @@ function calculateWinner(squares) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
+      //勝敗がついたら勝った方(◯か×)を返す。勝敗がついていない時はnullを返す
     }
   }
   return null;
