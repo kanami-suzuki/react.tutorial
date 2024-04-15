@@ -6,7 +6,7 @@
 - https://ja.react.dev/learn/tutorial-tic-tac-toe
 <br><br>
 - OS：Mac
-- 言語：JavaScript
+- 言語：JavaScript,CSS
 - ライブラリ：React
 - エディタ：Codesandbox
 - ツール：GitHub
