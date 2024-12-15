@@ -2,14 +2,10 @@ import { NextPage } from 'next';
 import { useState } from 'react';
 
 import Button from '@/components/common/parts/Button';
+import { useCountUp } from '@/lib/useCountUp';
 
 const Page: NextPage = () => {
-  const [count, setCount] = useState(0);
-  const onClickCountUp = () => {
-    setCount((prevState) => prevState + 1);
-    setCount((prevState) => prevState + 1);
-    setCount((prevState) => prevState + 1);
-  }
+  const {count, onClickCountUp} = useCountUp()
 
   return( 
     <div className='mx-auto max-w-4xl mt-10'>
