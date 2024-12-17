@@ -1,18 +1,10 @@
 import { NextPage } from 'next';
 
 import Button from '@/components/common/parts/Button';
-import { useState } from 'react';
+import { useTextShowHidden } from '@/lib/useTextShowHidden';
 
 const Page: NextPage = () => {
-  const [isHidden, setIsHidden] = useState(false);
-
-  const handleClickIndicate = () => {
-    setIsHidden(false);
-  }
-
-  const handleClickHidden = () => {
-    setIsHidden(true);
-  }
+  const {isHidden, handleClickIndicate, handleClickHidden} = useTextShowHidden();
 
   return( 
     <div className='mx-auto max-w-4xl mt-10'>
