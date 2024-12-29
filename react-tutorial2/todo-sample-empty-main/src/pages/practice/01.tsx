@@ -1,19 +1,20 @@
 import { NextPage } from 'next';
+import { useState } from 'react';
 
- import { useRealTimeText } from '@/lib/useRealTimeText';
+ import Button from '@/components/common/parts/Button';
+
+ const COLORS = ['lightblue', 'lightgreen', 'lightpink', 'lavender', 'wheat'];
 
 const Page: NextPage = () => {
-  const {text, handleChangeText} = useRealTimeText();
+  const [currentColorIndex, setCurrentColorIndex] = useState(0);
+  const changeColor = () => {
+    setCurrentColorIndex((prevState) => (prevState + 1) % COLORS.length)
+  }
 
   return( 
-    <div className='mx-auto max-w-4xl mt-10'>
+    <div className='h-screen pt-8' style={{ backgroundColor: COLORS[currentColorIndex]}}>
       <div className='flex justify-center'>
-        <div>
-          <h2 className='mb-4 text-center text-6xl'>{text}</h2>
-          <div className='flex justify-center'>
-            <input onChange={handleChangeText} className='border px-3 py-2' type="text" />
-          </div>
-        </div>
+        <Button onClick={changeColor} label="色を変更" variant="primary"/>
       </div>
     </div>
   );
