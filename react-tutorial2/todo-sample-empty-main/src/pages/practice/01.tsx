@@ -1,16 +1,42 @@
 import { NextPage } from 'next';
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 
  import Button from '@/components/common/parts/Button';
- import { useChangeBgColor, COLORS } from '@/lib/useChangeBgColor';
+//  import { useChangeBgColor } from '@/lib/useChangeBgColor';
 
 const Page: NextPage = () => {
-  const {currentColorIndex, changeColor} = useChangeBgColor()
+  const [inputValue, setInputValue] = useState('');
+  const [feedbackList, setFeedbackList] = useState<string[]>([]);
+
+  const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setInputValue(e.target.value)
+  };
+
+  const handleSubmit = () => {
+    if(!inputValue.trim()){
+      return;
+    }
+
+    setFeedbackList((prevState) => [...prevState, inputValue]);
+    setInputValue('');
+  }
 
   return( 
-    <div className='h-screen pt-8' style={{ backgroundColor: COLORS[currentColorIndex]}}>
+    <div className='mt-8 mx-auto max-w-4xl'>
       <div className='flex justify-center'>
-        <Button onClick={changeColor} label="色を変更" variant="primary"/>
+        <div>
+          <textarea className='border px-3 py-2 rounded-sm' placeholder='フィードバックを入力してください' value={inputValue} onChange={handleInputChange} />
+          <div className='flex ustify-center mt-4'>
+            <Button onClick={handleSubmit} label='送信する' variant='primary'/>
+          </div>
+          <div className='mt-2'>
+            {
+              feedbackList.map((feedback, index) => (
+                <li key={index}>{feedback}</li>
+              ))
+            }
+          </div>
+        </div>
       </div>
     </div>
   );
