@@ -2,24 +2,10 @@ import { NextPage } from 'next';
 import { useState, ChangeEvent } from 'react';
 
  import Button from '@/components/common/parts/Button';
-//  import { useChangeBgColor } from '@/lib/useChangeBgColor';
+ import { useDisplayFeedback } from '@/lib/useDisplayFeedback';
 
 const Page: NextPage = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [feedbackList, setFeedbackList] = useState<string[]>([]);
-
-  const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setInputValue(e.target.value)
-  };
-
-  const handleSubmit = () => {
-    if(!inputValue.trim()){
-      return;
-    }
-
-    setFeedbackList((prevState) => [...prevState, inputValue]);
-    setInputValue('');
-  }
+  const{feedbackList, handleInputChange, handleSubmit, inputValue} = useDisplayFeedback();
 
   return( 
     <div className='mt-8 mx-auto max-w-4xl'>
